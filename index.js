@@ -45,7 +45,7 @@ app.get('/nutrients',(req, res)=>{
 })
 
 //GET recepies by ingredients
-app.get('/nutrients',(req, res)=>{
+app.get('/ingredients',(req, res)=>{
     const END_POINT = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients=apples,+flour,+sugar&number=2&'
     const KEY = 'apiKey=f61fe8533b864b0a93a381168c2b6d65'
     axios.get(END_POINT+KEY)

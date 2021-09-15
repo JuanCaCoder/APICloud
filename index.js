@@ -24,6 +24,7 @@ app.get('/',(req, res)=>{
 
 //GET recepies
 app.get('/recepies',(req, res)=>{
+
     const END_POINT = 'https://api.spoonacular.com/recipes/complexSearch?query=pasta&maxFat=25&number=2&'
     const KEY = 'apiKey=f61fe8533b864b0a93a381168c2b6d65'
     axios.get(END_POINT+KEY)
@@ -80,6 +81,10 @@ app.get('/random',(req, res)=>{
 
 //POST recepies by cuisine 
 app.post('/recepies',(req, res)=>{
+
+    if(req.body.cuisine){
+
+    
     const {cuisine} = req.body
     
     const END_POINT = 'https://api.spoonacular.com/recipes/complexSearch?cuisine='
@@ -92,10 +97,20 @@ app.post('/recepies',(req, res)=>{
             console.log(finalEndpoint);
             res.send(response.data)
         }).catch((err) => res.status(404).send(err));
+    }
+    else{
+        res.status(404).send("manda bien la request de cuisine")
+    }
 })
 
 //POST NUTRIENTS By Max Carbs
 app.post('/nutrients',(req, res)=>{
+
+    
+    //validate input
+    if(req.body.maxCarbs){
+
+   
     const {maxCarbs} = req.body
     
     const END_POINT = 'https://api.spoonacular.com/recipes/findByNutrients?maxCarbs='
@@ -108,11 +123,17 @@ app.post('/nutrients',(req, res)=>{
             console.log(finalEndpoint);
             res.send(response.data)
         }).catch((err) => res.status(404).send(err));
+    }else {
+        res.status(404).send("entrega correctamente maxCarbs")
+    }
 })
 
 
 //POST Ingredients
 app.post('/ingredients',(req, res)=>{
+    if(req.body.ingredients){
+
+    
     const {ingredients} = req.body
     
     const END_POINT = 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='
@@ -125,10 +146,17 @@ app.post('/ingredients',(req, res)=>{
             console.log(finalEndpoint);
             res.send(response.data)
         }).catch((err) => res.status(404).send(err));
+    }
+    else{
+        res.status(404).send("manda bien los ingredients")
+    }
 })
 
 //POST Ingredients
 app.post('/information',(req, res)=>{
+    if(req.body.id){
+
+    
     const {id} = req.body
     
     const END_POINT = 'https://api.spoonacular.com/recipes/'
@@ -143,10 +171,15 @@ app.post('/information',(req, res)=>{
             console.log(finalEndpoint);
             res.send(response.data)
         }).catch((err) => res.status(404).send(err));
+    }else{
+        res.status(404).send("manda bien el id")
+    }
 })
 
 //POST Ingredient information
 app.post('/ingredientsI',(req, res)=>{
+    if(req.body.id){
+
     const {id} = req.body
     
     const END_POINT = 'https://api.spoonacular.com/food/ingredients/'
@@ -161,6 +194,9 @@ app.post('/ingredientsI',(req, res)=>{
             console.log(finalEndpoint);
             res.send(response.data)
         }).catch((err) => res.status(404).send(err));
+    }else{
+        res.status(404).send("manda bien el id")
+    }
 })
 
 //Listen server

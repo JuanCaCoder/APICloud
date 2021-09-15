@@ -2,6 +2,7 @@
 Act2
 
 Este servidor local permite interactuar con la API de spoonacular y hacer peticiones tanto de tipo get como post.
+
 //Get requests:
 
   -Get recepies: consigue recetas conforme a los parámetros establecidos
